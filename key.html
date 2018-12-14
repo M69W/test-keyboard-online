@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>原生JavaScript键盘事件</title>
+    <style>
+        div:nth-child(5){margin-top: 50px;font-size: 12px;color: #8d8d8d;}
+        div:nth-child(6){font-size: 12px;color: #8d8d8d;}
+    </style>
+</head>
+<body>
+<div>请按下键盘</div>
+<div>按键(keyCode):<span id="keyCode"></span></div>
+<div>按键(字母数字)：<span id="keychar"></span></div>
+<div>按键(功能区域)：<span id="jptxt"></span></div>
+<div>PrintScreen(keyup event only,看console) </div>
+<div>Fn无 keycode值，只能真机测试！</div>
+
+<a href="https://unixpapa.com/js/key.html" target="_blank">https://unixpapa.com/js/key.html</a><br>
+<a href="https://unixpapa.com/js/testkey.html" target="_blank">https://unixpapa.com/js/testkey.html</a><br>
+<a href="http://keycod.es/" target="_blank">http://keycod.es/</a><br>
+<a href="https://keycode.info/" target="_blank">https://keycode.info/</a><br>
+<script>
+//http://www.javascripter.net/faq/keycodes.htm
+//In most browsers, pressing the PrntScrn key fires keyup events only.
+//PrintScreen只有onkeyup 事件会在键盘按键被松开时发生
+document.onkeyup = function(e){
+	console.dir(e);
+	if(e.which == 44){
+		//获取键盘码
+		document.getElementById('keyCode').innerHTML = e.which;
+		document.getElementById('jptxt').innerHTML = "PrintScreen";
+        return false;
+	}
+}
+//获取键盘按下并激活函数
+document.onkeydown = function(even){
+    
+    console.dir(even);
+    //获取键盘码
+    var keyCode = even.keyCode;
+
+    //屏幕(组合)按键
+    /*if ((event.ctrlKey)&&(event.keyCode==78)){   //屏蔽 Ctrl+n 
+        event.returnValue=false; //设置为false
+     }*/
+    
+    //打印【键盘码】到页面上
+    document.getElementById('keyCode').innerHTML = keyCode;
+
+    //获取键盘上的【字母键盘】的字母
+    var keychar=String.fromCharCode(keyCode);
+    document.getElementById('keychar').innerHTML = keychar;
+
+    //【功能区按键】
+    var keyText = document.getElementById('jptxt');
+    
+    //开始switch循环 **  用于中文提示
+    switch(keyCode){
+        case 8:
+        keyText.innerHTML = "Backspace";
+        return false;
+        break;
+        case 9:
+        keyText.innerHTML = "Tab";
+        return false;
+        break;
+        case 12:
+        keyText.innerHTML = "Clear";
+        return false;
+        break;
+        case 13:
+        keyText.innerHTML = "Enter";
+        return false;
+        break;
+        case 16:
+        keyText.innerHTML = "Shift_L";
+        return false;
+        break;
+        case 17:
+        keyText.innerHTML = "Control_L";
+        return false;
+        break;
+        case 18:
+        keyText.innerHTML = "Alt_L";
+        return false;
+        break;
+        case 19:
+        keyText.innerHTML = "Pause";
+        return false;
+        break;
+        case 20:
+        keyText.innerHTML = "Caps Lock";
+        return false;
+        break;
+        case 27:
+        keyText.innerHTML = "Esc Escape";
+        return false;
+        break;
+        case 32:
+        keyText.innerHTML = "Space";
+        return false;
+        break;
+        case 33:
+        keyText.innerHTML = "Page Up";
+        return false;
+        break;
+        case 34:
+        keyText.innerHTML = "Page Down";
+        return false;
+        break;
+        case 35:
+        keyText.innerHTML = "End";
+        return false;
+        break;
+        case 36:
+        keyText.innerHTML = "Home";
+        return false;
+        break;
+        case 37:
+        keyText.innerHTML = "Left Arrow";
+        return false;
+        break;
+        case 38:
+        keyText.innerHTML = "Up Arrow";
+        return false;
+        break;
+        case 39:
+        keyText.innerHTML = "Right Arrow";
+        return false;
+        break;
+        case 40:
+        keyText.innerHTML = "Down Arrow";
+        return false;
+        break;
+        case 41:
+        keyText.innerHTML = "Select";
+        return false;
+        break;
+        case 42:
+        keyText.innerHTML = "Print";
+        return false;
+        break;
+        case 43:
+        keyText.innerHTML = "Execute";
+        return false;
+        break;
+        case 44:
+        keyText.innerHTML = "Execute";
+        return false;
+        break;
+        case 45:
+        keyText.innerHTML = "Insert";
+        return false;
+        break;
+        case 46:
+        keyText.innerHTML = "Delete";
+        return false;
+        break;
+        case 47:
+        keyText.innerHTML = "Help";
+        return false;
+        break;
+        case 91:
+        keyText.innerHTML = "Win";
+        return false;
+        case 93:
+        keyText.innerHTML = "ContextMenu";
+        return false;
+        case 96:
+        keyText.innerHTML = "KP_0";
+        return false;
+        case 97:
+        keyText.innerHTML = "KP_1";
+        return false;
+        case 98:
+        keyText.innerHTML = "KP_2";
+        return false;
+        case 99:
+        keyText.innerHTML = "KP_3";
+        return false;
+        case 100:
+        keyText.innerHTML = "KP_4";
+        return false;
+        case 101:
+        keyText.innerHTML = "KP_5";
+        return false;
+        case 102:
+        keyText.innerHTML = "KP_6";
+        return false;
+        case 103:
+        keyText.innerHTML = "KP_7";
+        return false;
+        case 104:
+        keyText.innerHTML = "KP_8";
+        return false;
+        case 105:
+        keyText.innerHTML = "KP_9";
+        return false;
+        case 106:
+        keyText.innerHTML = "KP_*";
+        return false;
+        case 107:
+        keyText.innerHTML = "KP_+";
+        return false;
+        case 109:
+        keyText.innerHTML = "KP_-";
+        return false;
+        case 110:
+        keyText.innerHTML = "KP_.";
+        return false;
+        case 111:
+        keyText.innerHTML = "/";
+        return false;
+        case 112:
+        keyText.innerHTML = "F1";
+        return false;
+        break;
+        case 113:
+        keyText.innerHTML = "F2";
+        return false;
+        break;
+        case 114:
+        keyText.innerHTML = "F3";
+        return false;
+        break;
+        case 115:
+        keyText.innerHTML = "F4";
+        return false;
+        break;
+        case 116:
+        keyText.innerHTML = "F5";
+        return false;
+        break;
+        case 117:
+        keyText.innerHTML = "F6";
+        return false;
+        break;
+        case 118:
+        keyText.innerHTML = "F7";
+        return false;
+        break;
+        case 119:
+        keyText.innerHTML = "F8";
+        return false;
+        break;
+        case 120:
+        keyText.innerHTML = "F9";
+        return false;
+        break;
+        case 121:
+        keyText.innerHTML = "F10";
+        return false;
+        break;
+        case 122:
+        keyText.innerHTML = "F11";
+        return false;
+        break;
+        case 123:
+        keyText.innerHTML = "F12";
+        return false;
+        break;
+        case 136:
+        keyText.innerHTML = "Num Lock";
+        return false;
+        break;
+        case 137:
+        keyText.innerHTML = "Scroll_Lock";
+        return false;
+        break;
+        case 144:
+        keyText.innerHTML = "Num Lock(Right Numer Lock)";
+        return false;
+        break;
+        case 145:
+        keyText.innerHTML = "Num Lock(ScrollLock)";
+        return false;
+        break;
+        case 166:
+        keyText.innerHTML = "BrowserBack";
+        return false;
+        break;
+        case 167:
+        keyText.innerHTML = "BrowserForward";
+        return false;
+        break;
+        case 173:
+        keyText.innerHTML = "Mute On|Off";
+        return false;
+        break;
+        case 174:
+        keyText.innerHTML = "VOL-";
+        return false;
+        break;
+        case 175:
+        keyText.innerHTML = "VOL+";
+        return false;
+        break;
+        case 186:
+        keyText.innerHTML = ";:";
+        return false;
+        break;
+        case 187:
+        keyText.innerHTML = "=+";
+        return false;
+        break;
+        case 188:
+        keyText.innerHTML = ",<";
+        return false;
+        break;
+        case 189:
+        keyText.innerHTML = "-_";
+        return false;
+        break;
+        case 190:
+        keyText.innerHTML = ".>";
+        return false;
+        break;
+        case 191:
+        keyText.innerHTML = "/?";
+        return false;
+        break;
+        case 192:
+        keyText.innerHTML = "`~";
+        return false;
+        break;
+        case 219:
+        keyText.innerHTML = "[{";
+        return false;
+        break;
+        case 220:
+        keyText.innerHTML = "\\|";
+        return false;
+        break;
+        case 221:
+        keyText.innerHTML = "]}";
+        return false;
+        break;
+        case 222:
+        keyText.innerHTML = "\'\"";
+        return false;
+        break;
+
+
+        default:
+        keyText.innerHTML = "";
+        break;
+    }
+}
+</script>
+</body>
+</html>
